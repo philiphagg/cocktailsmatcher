@@ -1,0 +1,203 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto", sans-serif;
+    color: #FCA311;
+}
+
+span, div {
+    font-family: "Roboto", sans-serif;
+    color: #E5E5E5;
+}
+
+body {
+    background: rgb(13, 36, 85);
+    background: radial-gradient(circle, rgba(13, 36, 85, 1) 0%, rgba(20, 31, 61, 1) 100%);
+}
+
+.container {
+    background-color: #14213D;
+    display: inline-block;
+    height: fit-content;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.58);
+}
+
+.flexparent {
+    display: flex;
+    margin: 10px;
+}
+
+
+.searchImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    height: 250px;
+    width: 220px;
+    object-fit: cover;
+
+}
+
+input, select {
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: rgb(228, 0, 247);
+    background: linear-gradient(90deg, rgba(228, 0, 247, 1) 0%, rgba(204, 59, 59, 1) 100%);
+}
+
+.detailImage {
+    display: block;
+    border-radius: 8px;
+    height: 350px;
+    width: 320px;
+    object-fit: cover;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.drinkTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.imageContainer {
+}
+
+.tableContainer {
+}
+
+.insConatiner {
+}
+
+.drinkTable td, .drinkTable th {
+    border: 0px solid #ddd;
+    padding: 8px;
+    table-layout: fixed;
+    width: min-content;
+}
+
+
+
+.drinkTable tr:hover {
+    background-color: #FCA311;
+    color: #14213D;
+}
+
+.drinkTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #14213D;
+    color: white;
+}
+
+
+/* CSS */
+.button-29 {
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #FF00BB 0, #FCA311 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+.button-29:focus {
+    box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.button-29:hover {
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-29:active {
+    box-shadow: #3c4fe0 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+
+
+.closeBtn {
+    background-color: transparent;
+    border-style: none;
+    color: #06D6A0;
+    font-size: large;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #253FE1;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    z-index: 1;
+    border: 4px solid #fff;
+    outline: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 19em;
+    margin-top: 1em;
+    background-color: #253FE1;
+    transform: rotate(45deg);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.icon-is-closed {
+    transform: translateX(.3em) rotate(0deg);
+}
+
+.icon {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+
+.sidebar {
+    width: 15em;
+    height: 100vh;
+    background-color: #fff;
+    transition: .7s;
+}
+
+.sidebar-is-closed {
+    transform: translateX(-16em);
+}

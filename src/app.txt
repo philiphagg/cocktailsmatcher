@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.12.0/lodash.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="js/fetch/searchDrink.js" type="text/jsx"></script>
+
+    <script src="js/views/details.js" type="text/jsx"></script>
+    <script src="js/views/drinksByIngredients.js" type="text/jsx"></script>
+    <script src="js/views/ingredients.js" type="text/jsx"></script>
+    <script src="js/views/ingredientsView.js" type="text/jsx"></script>
+    <script src="js/views/menu.js" type="text/jsx"></script>
+    <script src="js/views/searchResults.js" type="text/jsx"></script>
+    <script src="js/views/searchView.js" type="text/jsx"></script>
+
+    <script src="js/URLS.js"></script>
+
+    <script src="style2.css"></script>
+    <link rel="stylesheet" href="style2.css">
+    <script src="drinkModel.js"></script>
+    <!---
+        <script src="js/views/details.js" type="text/jsx"></script>
+        --->
+    <title>Drink generator</title>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/jsx">
+
+    function App() {
+        const [query, setQuery] = React.useState("margarita");
+        const [ingredientQuery, setIngredientQuery] = React.useState(null);
+
+        const [searchMode, setSearchMode] = React.useState(false);
+        //const [toggleMenu, setToggleMenu] = React.useState(false);
+
+        const [drinks, setDrinks] = React.useState(null);
+        const [random, setRandomDrink] = React.useState(null);
+        const [drink, setDrink] = React.useState(null);
+        const [ingredients, setIngredients] = React.useState(["Vodka"]);
+        const [ingredientsResult, setIngredientsResult] = React.useState(null);
+        const [drinksByIngredients, setDrinksByIngredients] = React.useState([]);
+        const [error, setError] = React.useState(null);
+
+        React.useEffect(function () {
+            DrinkSource.searchDrinks({query: query})
+                .then(dt => setDrinks(dt))
+                .catch(er => setError(er))
+        }, [query]);
+
+
+        React.useEffect(function () {
+            DrinkSource.getRandom()
+                .then(dt => setRandomDrink(dt))
+                .catch(er => setError(er))
+        }, [query]);
+
+        React.useEffect(function () {
+            DrinkSource.searchIngredient({query: ingredientQuery})
+                .then(dt => setIngredientsResult(dt))
+                .catch(er => setError(er))
+        }, [ingredientQuery]);
+
+
+        React.useEffect(function () {
+            Promise.all([...ingredients.map(ingredient =>
+                DrinkSource.searchByIngredient({query: ingredient}))])
+                .then(dt => {
+                    setDrinksByIngredients(dt);
+                    console.log("dt", dt);
+                })
+                .catch(er => setError(er)
+                );
+        }, [ingredients]);
+
+        function toggleSearchMode() {
+            setSearchMode(!searchMode);
+        }
+
+        function updateDrinkByName(){
+
+        }
+
+        return (
+            <div>
+                <Menu toggle={toggleSearchMode} state={searchMode}/>
+                <div className="flexparent">
+                    <div>
+                        {
+                            searchMode ?
+                                <div>
+                                    <IngredientsView searchResults={ingredientsResult} ingredients={ingredients}
+                                                     search={setIngredientQuery} addIngredient={setIngredients}/>
+                                    <DrinksByIngredients drinksArrays={drinksByIngredients} select={setDrink}/>
+                                </div>
+                                :
+                                <div>
+                                    <SearchView searchResults={drinks} randomDrinks={random} search={setQuery}
+                                                select={setDrink}/>
+                                </div>
+                        }
+                    </div>
+                    <div style={{width: "800px"}}>
+                        {drink != null ? <DetailsView drink={drink} setDrink={setDrink}/> : <>  </>}
+                    </div>
+                </div>
+            </div>)
+    }
+
+    ReactDOM.render(<div><App/></div>, document.getElementById("app"))
+
+    /*
+
+            function searchByQuery(query) {
+                React.useEffect(function () {
+                    DrinkSource.searchDrinks({query: query}).then(data => myModel.setDrinks(data))
+                }, []);
+            }
+
+            console.log("Model Drinks", myModel.drinks);
+
+        const searchPromise = DrinkSource.searchDrinks({query: "margarita"});
+
+        function SearchTest() {
+            const [data, setData] = React.useState(null);
+            const [error, setError] = React.useState(null);
+            React.useEffect(function () {
+                searchPromise.then(dt => setData(dt))
+                    .catch(er => setError(er))
+            }, []);
+            return data != null ? <Search searchResults={data} drink={console.log}/> : <div></div>;
+        }
+
+        ReactDOM.render(<div><SearchTest/></div>, document.getElementById("app"))
+     */
+
+    /*
+            function Search(params) {
+                fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + params.query)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(drinks => {
+                        console.log(drinks)
+                    })
+                return <div>
+                    hellu!!!!
+                </div>;
+            }
+        ReactDOM.render(<div><Search query={"margarita"}/></div>, document.getElementById("app"))
+    */
+
+
+</script>
+</html>
